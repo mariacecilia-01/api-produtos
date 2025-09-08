@@ -4,7 +4,7 @@ let clients = [
         nome: 'Julia Oliveira',
         email: 'juliaoliveira@gmail.com',
         telefone: '(11)95369-2245',
-        endereço: 'Rua Engenheiro Francisco Bicalho 83, Parque São Lucas, São Paulo - SP 03239-120',
+        endereco: 'Rua Engenheiro Francisco Bicalho 83, Parque São Lucas, São Paulo - SP 03239-120',
         dataCadastro: '2025-05-08 - 14h03min',
         ativo: true
     },
@@ -14,7 +14,7 @@ let clients = [
         nome: "Carlos Mendes",
         email: "carlos.mendes@gmail.com",
         telefone: "(21)98765-4321",
-        endereço: "Av. das Américas 1200, Barra da Tijuca, Rio de Janeiro - RJ 22793-082",
+        endereco: "Av. das Américas 1200, Barra da Tijuca, Rio de Janeiro - RJ 22793-082",
         dataCadastro: "2025-06-12 - 16h30min",
         ativo: true
     },
@@ -24,7 +24,7 @@ let clients = [
         nome: "Ana Paula Silva",
         email: "anapaula.silva@yahoo.com",
         telefone: "(31)91234-5678",
-        endereço: "Rua das Flores 456, Centro, Belo Horizonte - MG 30295-145",
+        endereco: "Rua das Flores 456, Centro, Belo Horizonte - MG 30295-145",
         dataCadastro: "2025-04-20 - 10h23min",
         ativo: true
     },
@@ -34,7 +34,7 @@ let clients = [
         nome: "Rafael Costa",
         email: "rafael.costa@hotmail.com",
         telefone: "(41)99876-5432",
-        endereço: "Rua XV de Novembro 789, Batel, Curitiba - PR 80420-090",
+        endereco: "Rua XV de Novembro 789, Batel, Curitiba - PR 80420-090",
         dataCadastro: "2025-03-15 - 11h20min",
         ativo: false
     },
@@ -44,7 +44,7 @@ let clients = [
         nome: "Beatriz Fernandes",
         email: "beatriz.fernandes@gmail.com",
         telefone: "(51)93456-7890",
-        endereço: "Av. Borges de Medeiros 321, Centro, Porto Alegre - RS 90020-022",
+        endereco: "Av. Borges de Medeiros 321, Centro, Porto Alegre - RS 90020-022",
         dataCadastro: "2025-07-01 - 17h59min",
         ativo: true
     }
@@ -59,14 +59,35 @@ const findById = (id) => {
 }
 
 const createClient = (newClient) => {
-    const newId = clients.length > 0 ? clients[clients.length - 1].id + 1 : 1
-    const useWithId = { id: newId, ...newClient }
-    clients.push(useWithId)
-    return useWithId
+    const newId = clients.length > 0 ? clients[clients.length -1].id + 1 : 1
+    const clientWithId = { id: newId, ...newClient}
+    clients.push(clientWithId)
+    return clientWithId
+}
+
+const updateById = (id, newItens) => {
+    const clientIndex = clients.findIndex(p => p.id === id)
+
+    if(clientIndex >= 0){
+        clients[clientIndex] = {id, ...newItens}
+        return clients[clientIndex]
+    }
+}
+
+const deleteById = (id) => {
+    const clientIndex = clients.findIndex(p => p.id === id)
+
+    if (clientIndex >= 0) {
+        const remove = clients.splice(clientIndex, 1)
+        return remove[0]
+    }
+
 }
 
 module.exports = {
     findAll,
     findById,
-    createClient
+    createClient,
+    updateById,
+    deleteById
 }
